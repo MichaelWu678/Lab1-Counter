@@ -12,6 +12,7 @@ int main(int argc, char **argv, char **env){
     //turn on signal tracing, and tell Verilator to dump the waveform data to counter.vcd
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
+
     top->trace(tfp,99);
     tfp->open("counter.vcd");
 
@@ -29,7 +30,7 @@ int main(int argc, char **argv, char **env){
             top->eval ();           //also output the trace for each half of the clock cycle
                                     //and force the model to evaluate on both edges of the clock
         }
-        top->rst = (i<2) | (i == 5);//change rst signals during simulation
+        top->rst = (i<2) | (i == 15);//change rst signals during simulation
         top->en = (i>4);            //change en signals during simulation
         if(Verilated::gotFinish())  exit(0);
     }
